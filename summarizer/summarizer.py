@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 
 # Load API key from environment
 load_dotenv()
-os.environ["GOOGLE_API_KEY"] = os.getenv("Gemini_API_KEY")
+#os.environ["GOOGLE_API_KEY"] = os.getenv("Gemini_API_KEY")
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY")) 
 
 prompt = """
@@ -176,3 +176,4 @@ def analyze_with_gemini_with_retry(full_entry, retries=3, delay=5):
                 time.sleep(delay)
             else:
                 raise
+
