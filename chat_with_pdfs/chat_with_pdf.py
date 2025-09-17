@@ -1,8 +1,6 @@
 import os
-import time
 from google import genai
 from google.genai import types
-from google.genai.errors import ServerError
 import pathlib
 import re
 from dotenv import load_dotenv
@@ -48,3 +46,4 @@ Answer:
     # print(response.text)
 
     return clean_text(response.text)
+
