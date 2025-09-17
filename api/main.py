@@ -18,6 +18,8 @@ from summary_to_table.json_to_word import json_to_word
 
 import os, shutil
 import re
+import uvicorn
+
 
 
 
@@ -201,3 +203,7 @@ async def download_summary(type: str = "pdf"):
             yield from file_like
     return StreamingResponse(iterfile(), media_type=media_type, headers={"Content-Disposition": f"attachment; filename={filename}"})
 
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
