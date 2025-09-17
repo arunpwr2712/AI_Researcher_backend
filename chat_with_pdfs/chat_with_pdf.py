@@ -16,7 +16,7 @@ def clean_text(text):
 # Load API key from environment
 # GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 load_dotenv()
-os.environ["GOOGLE_API_KEY"] = os.getenv("Gemini_API_KEY")
+#os.environ["GOOGLE_API_KEY"] = os.getenv("Gemini_API_KEY")
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY")) 
 # client = genai.Client(api_key="AIzaSyDiEpn5p976VNSeNZw-EEB8mSp_R5ZjXiA") 
 # client = genai.Client(api_key="AIzaSyDG7l3kcICM13ZtC_BNTiDOap0rPUzucxs")
@@ -46,4 +46,5 @@ Answer:
         ),
         prompt])
     # print(response.text)
+
     return clean_text(response.text)
