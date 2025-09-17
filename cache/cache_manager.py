@@ -1,4 +1,4 @@
-import os, json, time, hashlib
+import os, json, hashlib
 
 CACHE_FILE = os.path.join(os.path.dirname(__file__), '..', 'cache', 'summaries.json')
 os.makedirs(os.path.dirname(CACHE_FILE), exist_ok=True)
@@ -31,4 +31,5 @@ def set_cached_summary(key, summary,paper):
 
 def clear_cache_file():
     with open(CACHE_FILE, 'w') as f:
+
         f.write('')
