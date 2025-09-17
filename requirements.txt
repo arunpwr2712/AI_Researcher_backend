@@ -11,3 +11,4 @@ docx2pdf
 python-docx
 pdfplumber
 docx
+python-multipart
