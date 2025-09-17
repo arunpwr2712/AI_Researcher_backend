@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pydantic
+google-genai
+dotenv
+requests
+tqdm
+tenacity
+pdfminer.six
+docx2pdf
+python-docx
+pdfplumber
+docx
