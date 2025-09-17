@@ -1,13 +1,13 @@
 
-from fastapi.responses import StreamingResponse, FileResponse
+from fastapi.responses import StreamingResponse
 from fastapi import FastAPI, HTTPException, Query, UploadFile, File, Body, APIRouter
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
 from typing import List
 from chat_with_pdfs.chat_with_pdf import chat_with_pdf
-from paper_fetcher.ieee import fetch_ieee
-from paper_fetcher.semantic_scholar import fetch_semantic
+#from paper_fetcher.ieee import fetch_ieee
+#from paper_fetcher.semantic_scholar import fetch_semantic
 from paper_fetcher.crossref import fetch_crossref
 from paper_fetcher.arxiv import fetch_arxiv
 from paper_fetcher.core_api import fetch_core
@@ -207,3 +207,4 @@ async def download_summary(type: str = "pdf"):
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run(app, host="0.0.0.0", port=port)
+
