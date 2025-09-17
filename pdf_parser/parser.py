@@ -1,6 +1,5 @@
 import io
 import pdfplumber
-import fitz  # PyMuPDF
 
 def extract_text(pdf_bytes: bytes) -> str:
     text = ""
@@ -8,6 +7,7 @@ def extract_text(pdf_bytes: bytes) -> str:
         for page in pdf.pages:
             text += page.extract_text() + "\n"
     return text
+
 
 
 
