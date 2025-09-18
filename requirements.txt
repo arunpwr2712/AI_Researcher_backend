@@ -12,3 +12,4 @@ python-docx
 pdfplumber
 docx
 python-multipart
+spire-doc
