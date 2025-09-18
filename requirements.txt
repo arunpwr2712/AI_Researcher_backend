@@ -13,3 +13,4 @@ pdfplumber
 docx
 python-multipart
 spire-doc
+aspose-words
