@@ -68,10 +68,10 @@ def analyze_with_gemini(full_text: str) -> PaperSummary:
     try:
         response = client.models.generate_content(
             model="gemini-2.5-flash-lite",
-            contents=types.Part.from_text(prompt.format(
+            contents=[types.Part.from_text(prompt.format(
                 schema=schema_dict,
                 full_text=full_text
-            )),
+            ))],
             config=types.GenerateContentConfig(
                 response_mime_type="application/json",
                 response_schema=schema_dict
@@ -176,4 +176,5 @@ def analyze_with_gemini_with_retry(full_entry, retries=3, delay=5):
                 time.sleep(delay)
             else:
                 raise
+
 
