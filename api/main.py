@@ -1,13 +1,13 @@
 
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, FileResponse
 from fastapi import FastAPI, HTTPException, Query, UploadFile, File, Body, APIRouter
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
 from typing import List
 from chat_with_pdfs.chat_with_pdf import chat_with_pdf
-#from paper_fetcher.ieee import fetch_ieee
-#from paper_fetcher.semantic_scholar import fetch_semantic
+from paper_fetcher.ieee import fetch_ieee
+from paper_fetcher.semantic_scholar import fetch_semantic
 from paper_fetcher.crossref import fetch_crossref
 from paper_fetcher.arxiv import fetch_arxiv
 from paper_fetcher.core_api import fetch_core
@@ -19,7 +19,6 @@ from summary_to_table.json_to_word import json_to_word
 import os, shutil
 import re
 import uvicorn
-
 
 
 
@@ -42,9 +41,27 @@ def clean_text(text):
     text = re.sub(r'[^a-zA-Z0-9\s.,]', '', text)  # Keep alpha-numeric and basic punctuations
     return text.strip()
 
+@app.get("/ping")
+async def ping():
+    return {"status": "ready"}
+
+
+
 @app.get("/")
 async def root():
     return {"message": "Survey‑AI Backend is live"}
+
+
+
+class RefreshFlag(BaseModel):
+    flag: str
+
+@app.post("/refresh")
+async def receive_refresh(flag: RefreshFlag):
+    # Perform any action you like (e.g., reset session, log, etc.)
+    # print(f"Received refresh flag: {flag.flag}")
+
+    return {"status": "ok"}
 
 
 UPLOAD_DIR = "uploads"
@@ -207,4 +224,3 @@ async def download_summary(type: str = "pdf"):
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run(app, host="0.0.0.0", port=port)
-
