@@ -66,10 +66,9 @@ def analyze_with_gemini(full_text: str) -> PaperSummary:
     schema_dict.pop("title", None)
     schema_dict = remove_jsonschema_refs(schema_dict)
     try:
-        full_prompt = prompt.format(schema=schema_dict, full_text=full_text)
         response = client.models.generate_content(
             model="gemini-2.5-flash-lite",
-            contents=types.Part.from_text(full_prompt),
+            contents=types.Part.from_text(text = prompt.format(schema=schema_dict, full_text=full_text)),
             config=types.GenerateContentConfig(
                 response_mime_type="application/json",
                 response_schema=schema_dict
@@ -174,6 +173,7 @@ def analyze_with_gemini_with_retry(full_entry, retries=3, delay=5):
                 time.sleep(delay)
             else:
                 raise
+
 
 
 
