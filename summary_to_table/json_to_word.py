@@ -1,6 +1,11 @@
-from docx import Document
-from docx2pdf import convert
+from docx import Document as DocxDocument
+# from docx2pdf import convert
 import json
+from spire.doc import *
+from spire.doc.common import *
+
+
+
 
 def load_summaries(json_path):
     try:
@@ -18,7 +23,7 @@ def json_to_word():
     else:
         summaries = raw
     output_path = "paper_summary.docx"
-    doc = Document()
+    doc = DocxDocument()
     doc.add_heading("All Research Paper Summaries", level=1)
     if len(summaries) > 0:
     
@@ -56,8 +61,13 @@ def json_to_word():
                     row_cells[1].text = str(value)
             doc.add_paragraph("")
         doc.save(output_path)
-        convert("paper_summary.docx", "paper_summary.pdf")
+        # convert("paper_summary.docx", "paper_summary.pdf")
+        
 
+        document = Document()
+        document.LoadFromFile("paper_summary.docx")
+        document.SaveToFile("paper_summary.pdf", FileFormat.PDF)
+        document.Close()
 
 
 # json_to_word_table(paper["summary"], "paper_summary.docx")
